@@ -3,7 +3,7 @@ title = "Sobre"
 draft = false
 date = "2016-10-14T11:17:25-03:00"
 tags        = [ "welcome", "golang", "java" ]
-topics      = [ "welcome", "golang", "java" ]
+categories = ["welcome"]
 +++
 
 Criei este website para compartilhar códigos, dúvidas e aprendizados que vamos 

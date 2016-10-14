@@ -15,13 +15,13 @@
                         <a href="{{ .Permalink }}" class="post-title">{{ .Title }}</a>
 
                         <p class="post-meta">
-                            {{ with .Params.author }}
+                            {{ with .Site.Params.author }}
                                 By <strong class="post-author">{{ . }}</strong>
                             {{ end }}
                             {{ if isset .Params "categories" }}
                                 under 
                                 {{ $baseUrl := .Site.BaseURL }}
-                                {{ range .Params.categories }}<a class="post-category post-category-{{ . }}" href="{{ $baseUrl }}/categories/{{ . | urlize }}">{{ . }}</a>{{ end }}
+                                {{ range .Site.Params.categories }}<a class="post-category post-category-{{ . }}" href="{{ $baseUrl }}/categories/{{ . | urlize }}">{{ . }}</a>{{ end }}
                             {{ end }}
                         </p>
                     </header>

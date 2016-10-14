@@ -1,17 +1,17 @@
 baseurl = "https://ag-ifpb.github.io/blog"
 title = "AGBlog"
-languageCode = "pt-br"
+languagecode = "pt-br"
 theme = "purehugo"
-#disqusShortname = "xxxx"
+categories = ["welcome", "golang", "java"]
 
 [taxonomies]
   category = "categories"
   tag = "tags"
 
 [params]
-  hide_share_options = true
+  hideshareoptions = true
   author = "Ari Garcia"
   description = "Blog's Ari Garcia"
-  github_name = "aristofanio"
-  twitter_name = "aristofanioga"
+  githubname = "aristofanio"
+  twittername = "aristofanioga"
 

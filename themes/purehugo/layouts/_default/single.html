@@ -13,7 +13,7 @@
                         <a href="{{ .Permalink }}" class="post-title">{{ .Title }}</a>
 
                         <p class="post-meta">
-                            {{ with .Params.author }}
+                            {{ with .Site.Params.author }}
                                 By <strong class="post-author">{{ . }}</strong>
                             {{ end }}
                             {{ if isset .Params "categories" }}
@@ -23,8 +23,7 @@
                             {{ end }}
                         </p>
                     </header>
-<!--
-                    {{ if not .Site.Params.hideShareOptions }}
+                    {{ if not .Site.Params.hideshareoptions }}
                     <div class="post-share"> 
                         <div class="post-share-links">
                             <h4 style="">Share</h4>
@@ -42,7 +41,6 @@
                        
                     </div>
                     {{ end }}
--->
                     <div class="post-description">
                         {{ .Content }}
                     </div>
