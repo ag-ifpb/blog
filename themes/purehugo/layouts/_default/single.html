@@ -1,5 +1,4 @@
 {{ partial "header.html" . }}
-
 <div id="layout" class="pure-g">
     {{ partial "sidebar.html" . }}
 
@@ -24,8 +23,9 @@
                             {{ end }}
                         </p>
                     </header>
+                    ----> {{ .Site.Params.hideShareOptions }}
                     {{ if not .Site.Params.hideShareOptions }}
-                    <div class="post-share">
+                    <div class="post-share"> 
                         <div class="post-share-links">
                             <h4 style="">Share</h4>
                             {{ if isset .Site.Params "facebook" }}
@@ -39,6 +39,7 @@
                             {{ end }}
                             
                         </div>
+                       
                     </div>
                     {{ end }}
                     <div class="post-description">

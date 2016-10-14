@@ -1,3 +1,16 @@
-baseurl = "https://ag-ifpb.github.io/blog/"
+baseurl = "https://ag-ifpb.github.io/blog"
 title = "AGBlog"
 languageCode = "pt-br"
+theme = "purehugo"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  description = "AGBlog"
+  author = "Ari Garcia"
+  hideShareOptions = true
+  twitterName = "aristofanioga"
+  githubName = "aristofanio"
+
