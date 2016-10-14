@@ -6,12 +6,11 @@ tags        = [ "welcome", "golang", "java" ]
 topics      = [ "welcome", "golang", "java" ]
 +++
 
-Criei este website para compartilhar códigos, dúvidas e aprendizados vamos 
+Criei este website para compartilhar códigos, dúvidas e aprendizados que vamos 
 adquirindo no decorrer do tempo.
+Não há qualquer intensão de torna-lo uma fonte de pesquisa científica ou 
+de apresentar conteúdos formais, com rigor científico.
 
-Não há qualquer intensão de torná-lo uma fonte de pesquisa científica e 
-muito menos um meio de comunicação entre o autor e muito menos de apresentar
-conteúdos formais, com rigor científico.
 
 
 
