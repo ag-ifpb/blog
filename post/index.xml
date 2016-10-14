@@ -6,8 +6,18 @@
     <description>Recent content in Post-rsses on AGBlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Fri, 14 Oct 2016 11:17:25 -0300</lastBuildDate>
+    <lastBuildDate>Fri, 14 Oct 2016 18:03:48 -0300</lastBuildDate>
     <atom:link href="https://ag-ifpb.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Go - Instalação</title>
+      <link>https://ag-ifpb.github.io/blog/post/golang/</link>
+      <pubDate>Fri, 14 Oct 2016 18:03:48 -0300</pubDate>
+      
+      <guid>https://ag-ifpb.github.io/blog/post/golang/</guid>
+      <description>&lt;p&gt;Testando página de golang.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Sobre</title>

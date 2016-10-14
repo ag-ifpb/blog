@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AGBlog</title>
+    <link>https://ag-ifpb.github.io/blog/categories/golang/index.xml</link>
+    <description>Recent content on AGBlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <atom:link href="https://ag-ifpb.github.io/blog/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Go - Instalação</title>
+      <link>https://ag-ifpb.github.io/blog/post/golang/</link>
+      <pubDate>Fri, 14 Oct 2016 18:03:48 -0300</pubDate>
+      
+      <guid>https://ag-ifpb.github.io/blog/post/golang/</guid>
+      <description>&lt;p&gt;Testando página de golang.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
