@@ -1,6 +1,6 @@
 +++
 title = "Sobre"
-draft = true
+draft = false
 date = "2016-10-14T11:17:25-03:00"
 
 +++
