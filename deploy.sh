@@ -2,7 +2,7 @@
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
-/Volumes/MacintoshHDExt/ag.works/ari.workspace/repository/go/gopath/bin/hugo -t purehug
+/Volumes/MacintoshHDExt/ag.works/ari.workspace/repository/go/gopath/bin/hugo -t purehugo
 
 # Go To Public folder
 cd public
