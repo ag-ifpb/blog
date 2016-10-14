@@ -9,9 +9,9 @@ theme = "purehugo"
   tag = "tags"
 
 [params]
-  hideShareOptions = true
+  hide_share_options = true
   author = "Ari Garcia"
   description = "Blog's Ari Garcia"
-  githubname = "aristofanio"
-  twittername = "aristofanioga"
+  github_name = "aristofanio"
+  twitter_name = "aristofanioga"
 
