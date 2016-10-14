@@ -1,0 +1,15 @@
+---
+contentdir: "content"
+layoutdir: "layouts"
+publishdir: "public"
+indexes:
+  category: "categories"
+baseurl = "https://ag-ifpb.github.io/blog"
+title = "AGBlog"
+hideShareOptions: true
+#params:
+#  Subtitle: "Mais uma forma de compartilhamento..."
+#  AuthorName: "AriGarcia"
+#  GitHubUser: "aristofanio"
+#  hideShareOptions: true
+#  twitter: "aristofanioga"
