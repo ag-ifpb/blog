@@ -67,7 +67,7 @@
                 <section class="post">
                     <header class="post-header">
 
-                        <a href="https://ag-ifpb.github.io/blog/post/run-simple-javaapp-in-docker/" class="post-title">Run simple javaapp in Docker container</a>
+                        <a href="https://ag-ifpb.github.io/blog/post/run-simple-javaapp-in-docker/" class="post-title">Run simple Java App in Docker container</a>
 
                         <p class="post-meta">
                             
@@ -76,36 +76,220 @@
                             
                                 under 
                                 
-                                
+                                <a class="post-category post-category-java" href="https://ag-ifpb.github.io/blog/categories/java">java</a>
                             
                         </p>
                     </header>
 
                     <div class="post-description">
                         
-                    </div>
-                </section>
-                
-                <h1 class="content-subhead">14 Oct 2016, 18:03</h1>
-                <section class="post">
-                    <header class="post-header">
 
-                        <a href="https://ag-ifpb.github.io/blog/post/golang/" class="post-title">Go - Instalação</a>
+<h2 id="steps">Steps</h2>
 
-                        <p class="post-meta">
-                            
-                                By <strong class="post-author">Ari Garcia</strong>
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-golang" href="https://ag-ifpb.github.io/blog/categories/golang">golang</a>
-                            
-                        </p>
-                    </header>
+<ol>
+<li>build maven project;</li>
+<li>create file (Dockerfile) in project root directory;</li>
+<li>create file (start.sh) in project root directory;</li>
+<li>write &ldquo;{package}.Main.java&rdquo;</li>
+<li>configure &ldquo;Dockerfile&rdquo;</li>
+<li>add commands in &ldquo;start.sh&rdquo; file</li>
+<li>test</li>
+</ol>
 
-                    <div class="post-description">
-                        <p>Testando página de golang.</p>
+<h2 id="writing-app">Writing App</h2>
+
+<p>Create a package named &ldquo;ag.pod.helloworld&rdquo; or as you think best. This package must be used in <em>pom.xml</em> to define Main-Class in META-INF/MANIFEST.MF by Assembly Maven Plugin.</p>
+
+<pre><code>package ag.pod.helloworld;
+
+public class Main {
+
+	public static void main(String[] args) {
+		System.out.println(&quot;Hello World&quot;);
+	}
+}
+
+</code></pre>
+
+<p>For now &ldquo;Hello World&rdquo; is enough.</p>
+
+<h2 id="writing-dockerfile">Writing Dockerfile</h2>
+
+<p><em>Dockerfile</em> must be configurated for maven + openjdk-8 container from &ldquo;maven:3.3.9-jdk-8&rdquo; image.
+In container the app will be in path &ldquo;/opt/app&rdquo;. The shared volume will be &ldquo;/opt/shared&rdquo;.</p>
+
+<pre><code>FROM maven:3.3.9-jdk-8
+
+ADD . /opt/app
+RUN cd /opt/app &amp;&amp; mvn compile package -DskipTests=true
+RUN chmod +x /opt/app/start.sh
+
+CMD /opt/app/start.sh
+</code></pre>
+
+<p>Build docker image will take several minutes, so you must be patient!</p>
+
+<h2 id="writing-start-sh">Writing start.sh</h2>
+
+<p><em>start.sh</em> contain command line for run app in docker container. There is no secret!</p>
+
+<pre><code>#/bin/bash
+java -jar /opt/app/target/PODApp-jar-with-dependencies.jar
+
+</code></pre>
+
+<p>or</p>
+
+<pre><code>#/bin/bash
+java -cp /opt/app/target/PODApp.jar ag.pod.helloworld.Main
+
+</code></pre>
+
+<p><em>PODApp-jar-with-dependencies.jar</em> is builded on execute “mvn package”. For this <em>pom.xml</em> must contain configurated assembly-maven-plugin like bellow:</p>
+
+<pre><code>&lt;plugin&gt;
+  &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+  &lt;version&gt;3.0.0&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;descriptorRefs&gt;
+      &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;
+    &lt;/descriptorRefs&gt;
+    &lt;archive&gt;
+      &lt;manifest&gt;
+      	&lt;!-- change package name here --&gt;
+        &lt;mainClass&gt;ag.pod.helloworld.Main&lt;/mainClass&gt;
+      &lt;/manifest&gt;
+    &lt;/archive&gt;
+  &lt;/configuration&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;make-assembly&lt;/id&gt;
+      &lt;phase&gt;package&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;single&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<p>Note that the jar name is &ldquo;PODApp.jar&rdquo;. It is defined in the build tag on <em>pom.xml</em>:</p>
+
+<pre><code>&lt;build&gt;
+  &lt;finalName&gt;PODApp&lt;/finalName&gt;
+  &lt;plugins&gt;
+    ...
+  &lt;/plugins&gt;
+&lt;/build&gt;  
+</code></pre>
+
+<p>On execute package goal maven compile, package and generate two jar files:
+ i) {app_name}.jar and
+ii) {app_name}-jar-with-dependencies.jar</p>
+
+<p>The first jar contain no manifest file, so it will run using class-path and class-main. For instance: <code>java -cp /opt/app/target/PODApp.jar ag.pod.helloworld.Main</code>.</p>
+
+<p>The last jar contain manifest file with defined Class-Main and all embedded dependencies. In this case, to run use <code>java -jar /opt/app/target/PODApp-jar-with-dependencies.jar</code>.</p>
+
+<h2 id="testing">Testing</h2>
+
+<p>Split test in two parts. The first for check app in a docker container and second to check shared directory.</p>
+
+<h3 id="checking-app-in-container">Checking app in container</h3>
+
+<p>Execute in command line the stament bellow to build docker image in project root directory using the template: <code>docker build --tag=pod:&lt;version&gt; &lt;dockerfile path&gt;</code>.</p>
+
+<pre><code>  $ docker build --tag=pod:1.0.0 .
+</code></pre>
+
+<p>After build list images using <code>docker images</code> command. The result will be anything like:</p>
+
+<pre><code>  $ docker images
+  ...
+  REPOSITORY     TAG             IMAGE ID       CREATED       SIZE
+  pod            1.0.0           c7cf438420c2   2 weeks ago   651.5 MB
+  maven          3.3.9-jdk-8     14f4340d04cb   2 weeks ago   651.5 MB
+  ...
+
+</code></pre>
+
+<p>The next step is to create and run two containers. After run you must check containers logs.</p>
+
+<pre><code>  $ docker run -d -p 10999:10999 -v /tmp:/opt/shared -t pod:1.0.0 ls /opt/shared
+  $ docker run -d -p 10998:10998 -v /tmp:/opt/shared -t pod:1.0.0 ls /opt/shared
+</code></pre>
+
+<p>To check by log use <code>docker logs &lt;containerId&gt;</code>. You obtain container id by <code>docker ps -a</code> command.</p>
+
+<pre><code>  $ docker ps -a
+  ...
+  CONTAINER ID        IMAGE         COMMAND                  CREATED
+  783c8b7b2759        pod:1.0.0     &quot;/usr/local/bin/mvn-e&quot;   4 minutes ago
+  24566245756a        pod:1.0.0     &quot;/usr/local/bin/mvn-e&quot;   4 minutes ago
+  ...
+
+  $ docker logs 783c8b7b2759
+  ...
+  sum.txt             diff.txt
+  ...
+
+  $ docker logs 24566245756a
+  ...
+  sum.txt             diff.txt
+  ...
+
+</code></pre>
+
+<h3 id="checking-io-in-shared-directory">Checking IO in shared directory</h3>
+
+<p>Replace last line in Dockerfile by <code>CMD touch /opt/shared/sum.txt &amp;&amp; touch /opt/shared/diff.txt &amp;&amp; /opt/app/start.sh</code>. It will create two files in /opt/shared path that can be checked by code:</p>
+
+<pre><code>  public static void main(String[] args) throws IOException {
+	...
+	//check sum.txt
+	File sum_file = new File(&quot;/opt/shared/sum.txt&quot;);
+	if (sum_file.exists()){
+		System.out.println(&quot;Can write: &quot; + sum_file.canWrite());
+		System.out.println(&quot;Can read: &quot; + sum_file.canRead());
+	}
+	else {
+		System.out.println(&quot;Sum file not found&quot;);
+	}
+	
+	//check diff.txt
+	File diff_file = new File(&quot;/opt/shared/diff.txt&quot;);
+	if (diff_file.exists()){
+		System.out.println(&quot;Can write: &quot; + diff_file.canWrite());
+		System.out.println(&quot;Can read: &quot; + diff_file.canRead());
+	}
+	else {
+		System.out.println(&quot;Diff file not found&quot;);
+	}
+	...
+  }
+</code></pre>
+
+<p>The result must be similar to:</p>
+
+<pre><code>  $ docker logs 783c8b7b2759
+  Hello World
+  Can write: true
+  Can read: true
+  Can write: true
+  Can read: true
+</code></pre>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>Assembly Maven Plugin: <a href="https://maven.apache.org/plugins/maven-assembly-plugin/usage.html">https://maven.apache.org/plugins/maven-assembly-plugin/usage.html</a></li>
+<li>Docker Image: <a href="https://hub.docker.com/_/maven/">https://hub.docker.com/_/maven/</a></li>
+<li>Share Directories: <a href="http://devopslab.com.br/docker-como-montar-uma-pasta-do-host-docker-dentro-de-um-container/">http://devopslab.com.br/docker-como-montar-uma-pasta-do-host-docker-dentro-de-um-container/</a></li>
+</ul>
+
+<h2 id="source-code">Source Code</h2>
+
+<p><a href="https://github.com/ag-ifpb/pod-codigos-20162/tree/master/ag.pod.helloworld">https://github.com/ag-ifpb/pod-codigos-20162/tree/master/ag.pod.helloworld</a></p>
 
                     </div>
                 </section>

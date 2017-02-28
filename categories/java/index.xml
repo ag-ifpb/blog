@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AGBlog</title>
-    <link>https://ag-ifpb.github.io/blog/index.xml</link>
+    <link>https://ag-ifpb.github.io/blog/categories/java/index.xml</link>
     <description>Recent content on AGBlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Tue, 28 Feb 2017 11:30:52 -0300</lastBuildDate>
-    <atom:link href="https://ag-ifpb.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ag-ifpb.github.io/blog/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Run simple Java App in Docker container</title>
@@ -223,19 +222,6 @@ ii) {app_name}-jar-with-dependencies.jar&lt;/p&gt;
 &lt;h2 id=&#34;source-code&#34;&gt;Source Code&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/ag-ifpb/pod-codigos-20162/tree/master/ag.pod.helloworld&#34;&gt;https://github.com/ag-ifpb/pod-codigos-20162/tree/master/ag.pod.helloworld&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Sobre</title>
-      <link>https://ag-ifpb.github.io/blog/post/welcome/</link>
-      <pubDate>Fri, 14 Oct 2016 11:17:25 -0300</pubDate>
-      
-      <guid>https://ag-ifpb.github.io/blog/post/welcome/</guid>
-      <description>&lt;p&gt;Criei este website para compartilhar códigos, dúvidas e aprendizados que vamos
-adquirindo no decorrer do tempo.
-Não há qualquer intensão de torna-lo uma fonte de pesquisa científica ou
-de apresentar conteúdos formais, com rigor científico.&lt;/p&gt;
 </description>
     </item>
     
