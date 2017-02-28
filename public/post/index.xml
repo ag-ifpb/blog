@@ -6,8 +6,17 @@
     <description>Recent content in Post-rsses on AGBlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Fri, 14 Oct 2016 18:03:48 -0300</lastBuildDate>
+    <lastBuildDate>Tue, 28 Feb 2017 11:30:52 -0300</lastBuildDate>
     <atom:link href="https://ag-ifpb.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Run simple javaapp in Docker container</title>
+      <link>https://ag-ifpb.github.io/blog/post/run-simple-javaapp-in-docker/</link>
+      <pubDate>Tue, 28 Feb 2017 11:30:52 -0300</pubDate>
+      
+      <guid>https://ag-ifpb.github.io/blog/post/run-simple-javaapp-in-docker/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Go - Instalação</title>
